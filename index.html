@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevHub - Geliştirici & İçerik Ekosistemi</title>
-    <!-- Google Identity Services -->
+    <title>DevHub - Geliştirici Portalı</title>
+    
+    <!-- Dış Bağlantılar -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- EmailJS Kütüphanesi -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init("YOUR_PUBLIC_KEY");
-        })();
-    </script>
-    <!-- YouTube IFrame Player API -->
     <script src="https://www.youtube.com/iframe_api"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -520,18 +514,16 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="modal-close" onclick="closeModalDirect()">&times;</span>
             <div class="modal-header">
-                <span id="modal-icon" style="font-size: 1.5rem;">ℹ️</span>
+                <span id="modal-icon" style="font-size: 1.5rem;">❓</span>
                 <span id="modal-title" class="modal-title">Başlık</span>
             </div>
-            <div id="modal-body" class="modal-body">
-                İçerik yükleniyor...
-            </div>
+            <div id="modal-body" class="modal-body">İçerik yükleniyor...</div>
         </div>
     </div>
 
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="#" class="logo">DevHub.</a>
+        <a href="#" class="logo">DevHub.4</a>
         <ul class="nav-links">
             <li><a href="#projects-section">Projeler</a></li>
             <li><a href="#community-section">Topluluk</a></li>
@@ -539,7 +531,7 @@
             <li><a href="#feedback-section">Geri Bildirim</a></li>
         </ul>
         <div class="nav-right">
-            <span class="status-badge">● Sistem Aktif</span>
+            <span class="status-badge">Sistem Aktif</span>
             <button id="auth-btn" class="btn-login" onclick="loginWithGoogle()">Giriş Yap</button>
         </div>
     </nav>
@@ -550,13 +542,13 @@
             <div class="panel-box">
                 <div class="panel-title">👤 Profil Paneli</div>
                 <div style="text-align: center; margin-bottom: 10px;">
-                    <img id="user-avatar" src="" style="border-radius: 50%; width: 50px; height: 50px; border: 2px solid #00d2b5; display: none; margin: 0 auto;">
+                    <img id="user-avatar" src="" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #00d2b5; display: none; margin: 0 auto 5px auto;" alt="Profil">
                     <div id="user-name" style="font-size: 0.9rem; font-weight: bold; margin-top: 5px;">Giriş Yapılmadı</div>
                     <div id="user-type" style="font-size: 0.75rem; color: #94a3b8;">Misafir</div>
                 </div>
                 <div class="badge-list">
-                    <span class="badge">👨‍💻 Geliştirici</span>
-                    <span class="badge">🚀 DevHub Üyesi</span>
+                    <span class="badge">Geliştirici</span>
+                    <span class="badge">DevHub Üyesi</span>
                 </div>
             </div>
 
@@ -581,7 +573,7 @@
                         <option value="4xDzrJKXOOY">Synthwave / Chillwave Radio</option>
                         <option value="5qap5aO4i9A">Lofi Girl - Sleep Radio</option>
                     </select>
-                    <button class="btn-primary" id="radio-toggle-btn" style="font-size:0.75rem; padding: 6px;" onclick="toggleRadio()">Başlat 🎵</button>
+                    <button id="radio-toggle-btn" class="btn-primary" style="font-size:0.75rem; padding: 6px;" onclick="toggleRadio()">Başlat 🎵</button>
                 </div>
             </div>
         </aside>
@@ -593,12 +585,12 @@
                 <h1 class="hero-title">Geliştiriciler ve İçerik Üreticileri İçin <span>Ortak Ekosistem</span></h1>
                 <p class="hero-desc">DevHub üzerinde projelerinizi sergileyin, yeni takım arkadaşları bulun ve topluluk ile anlık iletişim kurun.</p>
                 <div class="cta-buttons">
-                    <a href="#projects-section" class="btn-primary">Projeleri Keşfet 🚀</a>
-                    <a href="#community-section" class="btn-secondary">Topluluğa Katıl 🌐</a>
+                    <button class="btn-primary" onclick="toggleProjectForm()">+ Proje Paylaş</button>
+                    <button class="btn-secondary" onclick="openGuide('chat')">Rehberi İncele</button>
                 </div>
             </section>
 
-            <!-- Projeler Bölümü -->
+            <!-- Öne Çıkan Projeler -->
             <section id="projects-section" class="section-box">
                 <div class="section-header-flex">
                     <h2 class="section-header">🚀 Öne Çıkan Projeler</h2>
@@ -611,14 +603,14 @@
                         <input type="text" id="p-title" class="form-input" placeholder="Örn: AI Destekli Kod Editörü">
                     </div>
                     <div class="form-group">
-                        <label>Proje Açıklaması</label>
+                        <label>Açıklama</label>
                         <textarea id="p-desc" class="form-input" placeholder="Projenizin amacını ve teknolojilerini kısaca anlatın..."></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Etiketler</label>
-                        <input type="text" id="p-tag" class="form-input" placeholder="Örn: React, Node.js, AI">
+                        <label>Proje Dosyası / Medya (Görsel, Video veya Belge)</label>
+                        <input type="file" id="p-file" class="form-input" accept="image/*,video/*,.zip,.rar,.pdf">
                     </div>
-                    <button class="btn-primary" style="width: 100%;" onclick="addProject()">Yayınla 🚀</button>
+                    <button class="btn-primary" onclick="addProject()">Yayınla 🚀</button>
                 </div>
 
                 <div id="projects-empty" class="empty-state">
@@ -629,7 +621,9 @@
 
             <!-- Topluluk Bölümü -->
             <section id="community-section" class="section-box">
-                <h2 class="section-header" style="margin-bottom: 20px;">🌐 Canlı Topluluk & Rehberler</h2>
+                <div class="section-header-flex">
+                    <h2 class="section-header">💬 Canlı Topluluk & Rehberler</h2>
+                </div>
                 <div class="community-grid">
                     <div class="community-card" onclick="openGuide('chat')">
                         <div class="community-icon">🌐</div>
@@ -638,8 +632,8 @@
                     </div>
                     <div class="community-card" onclick="openGuide('opensource')">
                         <div class="community-icon">⚡</div>
-                        <div class="community-title">Açık Kaynak Kod Katkısı</div>
-                        <div class="community-desc">DevHub projesine katkıda bulunarak XP kazanın.</div>
+                        <div class="community-title">Açık Kaynak Katkısı</div>
+                        <div class="community-desc">Projelere katkıda bulunun veya kendi projenize geliştirici arayın.</div>
                     </div>
                     <div class="community-card" onclick="openGuide('faq')">
                         <div class="community-icon">❓</div>
@@ -648,9 +642,9 @@
                     </div>
                 </div>
 
-                <h3 style="color:#00d2b5; font-size:1.1rem; margin-top:20px; margin-bottom:10px;">🌟 Son Paylaşılan Profil Vitrini</h3>
+                <h3 style="color: #00d2b5; font-size:1.1rem; margin-top:20px; margin-bottom:10px;">✨ Son Paylaşılan Profil Vitrini</h3>
                 <div id="community-profile-feed" class="profile-projects-grid">
-                    <div id="profiles-empty" class="empty-state" style="grid-column: 1/-1;">
+                    <div id="profiles-empty" class="empty-state" style="grid-column: 1 / -1;">
                         Henüz profil vitrinine eklenen bir paylaşım olmadı.
                     </div>
                 </div>
@@ -673,34 +667,37 @@
                         <textarea id="j-desc" class="form-input" placeholder="Aranan kriterler ve iletişim bilgileri..."></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Kategori / Rol</label>
-                        <input type="text" id="j-tag" class="form-input" placeholder="Örn: Tam Zamanlı, Proje Bazlı">
+                        <label>Etiket</label>
+                        <input type="text" id="j-tag" class="form-input" placeholder="Örn: Vue.js, Remote, Gönüllü">
                     </div>
-                    <button class="btn-primary" style="width: 100%;" onclick="addJob()">İlanı Yayınla 💼</button>
+                    <button class="btn-primary" onclick="addJob()">İlanı Yayınla 💼</button>
                 </div>
 
                 <div id="jobs-empty" class="empty-state">
-                    Aktif ilan bulunmamaktadır.
+                    Henüz yayınlanmış bir ilan bulunmuyor.
                 </div>
                 <div id="jobs-container" class="cards-grid"></div>
             </section>
 
             <!-- Geri Bildirim Bölümü -->
             <section id="feedback-section" class="section-box">
-                <h2 class="section-header" style="margin-bottom: 15px;">✉️ Bize Ulaşın / Geri Bildirim</h2>
+                <div class="section-header-flex">
+                    <h2 class="section-header">📩 Doğrudan Geri Bildirim</h2>
+                </div>
                 <div class="form-group">
                     <label>Konu</label>
-                    <input type="text" id="c-subject" class="form-input" placeholder="Örn: Hata Bildirimi veya Öneri">
+                    <input type="text" id="c-subject" class="form-input" placeholder="Örn: Hata Bildirimi / Öneri">
                 </div>
                 <div class="form-group">
                     <label>Mesajınız</label>
-                    <textarea id="c-msg" class="form-input" placeholder="Mesajınızı buraya yazabilirsiniz..."></textarea>
+                    <textarea id="c-msg" class="form-input" placeholder="Görüş ve önerilerinizi yazın..."></textarea>
                 </div>
-                <button id="send-feedback-btn" class="btn-primary" onclick="sendFeedback()">Gmail'e İlet 🚀</button>
+                <button class="btn-primary" id="send-feedback-btn" onclick="sendFeedback()">Gmail'e İlet 🚀</button>
             </section>
         </main>
     </div>
 
+    <!-- JavaScript Kodları -->
     <script>
         const DEVHUB_CLIENT_ID = "204189338795-7vqntvlj6vt01625ige2s00j1ug2bheu.apps.googleusercontent.com";
 
@@ -726,7 +723,7 @@
                         <li>Proje fikirlerinizi veya teknik sorularınızı sohbete yazın.</li>
                         <li>Anlık geri bildirim almak için projenizin ekran görüntülerini veya canlı demo linklerini ekleyin.</li>
                     </ol>
-                    <p style="color:#00d2b5; font-size:0.8rem;">💡 İpucu: Saygılı ve yapıcı geri bildirimler vermek topluluk puanınızı (XP) artırır!</p>
+                    <p style="color:#00d2b5; font-size:0.8rem; margin-top:10px;">💡 İpucu: Saygılı ve yapıcı geri bildirimler vermek topluluk puanınızı (XP) artırır!</p>
                 `;
             } else if (type === 'opensource') {
                 icon.textContent = "⚡";
@@ -739,7 +736,7 @@
                         <li>Kod değişikliklerinizi tamamlayıp açıklamalı bir mesajla <strong>Commit</strong> yapın.</li>
                         <li>Ana depoya bir <strong>Pull Request (PR)</strong> gönderin.</li>
                     </ol>
-                    <p style="color:#00d2b5; font-size:0.8rem;">⚡ Katkıda bulunan tüm geliştiriciler DevHub Katkıcı Rozeti kazanır!</p>
+                    <p style="color:#00d2b5; font-size:0.8rem; margin-top:10px;">⚡ Katkıda bulunan tüm geliştiriciler DevHub Katkıcı Rozeti kazanır!</p>
                 `;
             } else if (type === 'faq') {
                 icon.textContent = "❓";
@@ -816,7 +813,8 @@
         function addProject() {
             const title = document.getElementById('p-title').value;
             const desc = document.getElementById('p-desc').value;
-            const tag = document.getElementById('p-tag').value;
+            const fileInput = document.getElementById('p-file');
+            const file = fileInput.files[0];
 
             if(!title || !desc) {
                 showToast("Lütfen proje adı ve açıklamasını doldurun.");
@@ -828,13 +826,27 @@
 
             emptyState.style.display = 'none';
 
+            let mediaHtml = "";
+            if (file) {
+                const fileName = file.name;
+                if (file.type.startsWith('image/')) {
+                    const imgUrl = URL.createObjectURL(file);
+                    mediaHtml = `<img src="${imgUrl}" style="max-width:100%; max-height:180px; border-radius:6px; margin-top:8px; object-fit:cover;">`;
+                } else if (file.type.startsWith('video/')) {
+                    const videoUrl = URL.createObjectURL(file);
+                    mediaHtml = `<video src="${videoUrl}" controls style="max-width:100%; max-height:180px; border-radius:6px; margin-top:8px;"></video>`;
+                } else {
+                    mediaHtml = `<div style="margin-top:8px; font-size:0.8rem; color:#00d2b5; font-weight:bold;">📁 Dosya: ${fileName}</div>`;
+                }
+            }
+
             // Projeler Alanına Ekleme
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
                 <h4>${title}</h4>
                 <p>${desc}</p>
-                <span class="card-tag">${tag || 'Genel'}</span>
+                ${mediaHtml}
             `;
 
             container.appendChild(card);
@@ -865,6 +877,7 @@
                 <div class="profile-project-box">
                     <div class="profile-project-title">🚀 ${title}</div>
                     <div class="profile-project-desc">${desc}</div>
+                    ${mediaHtml}
                 </div>
             `;
 
@@ -872,13 +885,13 @@
 
             document.getElementById('p-title').value = '';
             document.getElementById('p-desc').value = '';
-            document.getElementById('p-tag').value = '';
+            document.getElementById('p-file').value = '';
             toggleProjectForm();
 
             projectCount++;
             document.getElementById('stat-projects').textContent = projectCount;
 
-            showToast("Projeniz ve profil kartınız topluluk vitrininde yayınlandı! 🚀");
+            showToast("Projeniz ve eklediğiniz dosya başarıyla yayınlandı! 🚀");
         }
 
         function addJob() {
